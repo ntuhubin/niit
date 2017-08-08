@@ -7,19 +7,51 @@
 <title>系统登录</title>
 </head>
 <body>
-	<h1>系统登录，请输入用户名和密码</h1>
-	<form action="<%=request.getContextPath() %>/Info/login" method="post">
-		<input type="text" name="lname" />
-		<input type="text" name="pwd" />
-    	<input type="submit" value="登录" />
-    </form>
+	<form action="<%=request.getContextPath() %>/Info/login" name="loginform" method="post">  
+         <h2 align="center" style=" font-family:隶书">欢迎登陆信息查询管理系统</h2><br>           
+       <table align="center" style="border:1px solid">  
+         <tr>  
+            <td><font color="blue"><b>账 号：</b></font></td>  
+            <td><input name="lname" type="text"> </td>  
+         </tr>  
+         <tr>  
+            <td><font color="blue"><b>密 码：</b></font></td>  
+            <td><input name="pwd" type="password" size="20"> </td>  
+         </tr>  
+         <tr>  
+            <td></td>  
+            <td><input type="button" value="登  录" onclick="login()">  
+                  
+             <input type="button" value="立即注册" onclick="register()">    
+            </td>            
+         </tr>  
+       </table>            
+     </form>  
 </body>
-<script>
+<script language="javascript">
 	window.onload = function(){
 		var msg = "${msg}";
 		if(msg != ""){
-			alert(msg);
+			window.alert(msg);
 		}
 	}
+	function login(){  
+        if(document.loginform.lname.value==""){  
+          window.alert("账号不能为空！");  
+          return ;  
+        }  
+        if(document.loginform.pwd.value==""){  
+          window.alert("密码不能为空！");  
+          return ;  
+        }  
+        loginform.submit(); 
+        }
+	function register(){  
+        document.loginform.method="post";  
+        document.loginform.target="rightframe";  
+        document.loginform.action="<%=request.getContextPath() %>/Info/insert";  
+        document.loginform.submit();  
+    }  
+
 </script>
 </html>
